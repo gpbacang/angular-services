@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LogService } from './log.service';
 
 @Component({
     selector: 'si-cmp-a',
@@ -6,8 +7,8 @@ import { Component } from '@angular/core';
     <div>
       <input type="text" #input>
       <button (click)="onLog(input.value)">Log</button>
-      <button (click)="onStore(input.value)">Store</button>
-      <button (click)="onSend(input.value)">Send</button>
+      <button (click)="onStore()">Store</button>
+      <button (click)="onSend()">Send</button>
     </div>
     <hr>
     <div>
@@ -19,14 +20,18 @@ import { Component } from '@angular/core';
         <h3>Received Value</h3>
         <p>{{value}}</p>
     </div>
-  `
+  `,
+  providers: [LogService]
 })
 export class CmpAComponent {
     value = '';
+
+    constructor(private logService: LogService) {}
+
     items: string[] = [];
 
     onLog(value: string) {
-
+      this.logService.writeToLog(value);
     }
 
     onStore(value: string) {
