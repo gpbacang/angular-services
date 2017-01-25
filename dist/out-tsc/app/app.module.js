@@ -13,6 +13,8 @@ import { AppComponent } from './app.component';
 import { ServiceComponent } from "./service/service.component";
 import { CmpAComponent } from "./service/cmp-a.component";
 import { CmpBComponent } from "./service/cmp-b.component";
+import { LogService } from "./service/log.service";
+import { DataService } from "./service/data.service";
 var AppModule = (function () {
     function AppModule() {
     }
@@ -27,7 +29,7 @@ AppModule = __decorate([
             CmpBComponent
         ],
         imports: [BrowserModule],
-        providers: [],
+        providers: [LogService, DataService],
         bootstrap: [AppComponent]
     }),
     __metadata("design:paramtypes", [])
