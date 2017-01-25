@@ -9,9 +9,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Component } from '@angular/core';
 import { LogService } from './log.service';
+import { DataService } from './data.service';
 var CmpBComponent = (function () {
-    function CmpBComponent(logService) {
+    function CmpBComponent(logService, dataService) {
         this.logService = logService;
+        this.dataService = dataService;
         this.value = '';
         this.items = [];
     }
@@ -19,20 +21,22 @@ var CmpBComponent = (function () {
         this.logService.writeToLog(value);
     };
     CmpBComponent.prototype.onStore = function (value) {
+        this.dataService.addData(value);
     };
     CmpBComponent.prototype.onGet = function () {
+        this.items = this.dataService.getData().slice(0);
     };
-    CmpBComponent.prototype.ngOnInit = function () {
+    CmpBComponent.prototype.onSend = function (value) {
     };
     return CmpBComponent;
 }());
 CmpBComponent = __decorate([
     Component({
         selector: 'si-cmp-b',
-        template: "\n    <div>\n      <input type=\"text\" #input>\n      <button (click)=\"onLog(input.value)\">Log</button>\n      <button (click)=\"onStore()\">Store</button>\n    </div>\n    <hr>\n    <div>\n        <button (click)=\"onGet()\">Refresh Storage</button>\n        <h3>Storage</h3>\n        <ul>\n            <li *ngFor=\"let item of items\">{{item}}</li>\n        </ul>\n        <h3>Received Value</h3>\n        <p>{{value}}</p>\n    </div>\n  ",
+        template: "\n    <div>\n      <input type=\"text\" #input>\n      <button (click)=\"onLog(input.value)\">Log</button>\n      <button (click)=\"onStore(input.value)\">Store</button>\n      <button (click)=\"onSend()\">Send</button>\n    </div>\n    <hr>\n    <div>\n        <button (click)=\"onGet()\">Refresh Storage</button>\n        <h3>Storage</h3>\n        <ul>\n            <li *ngFor=\"let item of items\">{{item}}</li>\n        </ul>\n        <h3>Received Value</h3>\n        <p>{{value}}</p>\n    </div>\n  ",
         providers: [LogService]
     }),
-    __metadata("design:paramtypes", [LogService])
+    __metadata("design:paramtypes", [LogService, DataService])
 ], CmpBComponent);
 export { CmpBComponent };
 //# sourceMappingURL=../../../../src/app/service/cmp-b.component.js.map

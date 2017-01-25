@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+
 import { LogService } from './log.service';
+import { DataService } from './data.service';
 
 @Component({
     selector: 'si-cmp-a',
@@ -7,7 +9,7 @@ import { LogService } from './log.service';
     <div>
       <input type="text" #input>
       <button (click)="onLog(input.value)">Log</button>
-      <button (click)="onStore()">Store</button>
+      <button (click)="onStore(input.value)">Store</button>
       <button (click)="onSend()">Send</button>
     </div>
     <hr>
@@ -26,7 +28,7 @@ import { LogService } from './log.service';
 export class CmpAComponent {
     value = '';
 
-    constructor(private logService: LogService) {}
+    constructor(private logService: LogService, private dataService: DataService) {}
 
     items: string[] = [];
 
@@ -35,11 +37,11 @@ export class CmpAComponent {
     }
 
     onStore(value: string) {
-
+      this.dataService.addData(value);
     }
 
     onGet() {
-
+      this.items = this.dataService.getData().slice(0);
     }
 
     onSend(value: string) {
