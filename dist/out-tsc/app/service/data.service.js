@@ -7,11 +7,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { LogService } from './log.service';
 var DataService = (function () {
     function DataService(logService) {
         this.logService = logService;
+        this.pushedData = new EventEmitter();
         this.data = [];
     }
     DataService.prototype.addData = function (input) {
@@ -20,6 +21,9 @@ var DataService = (function () {
     };
     DataService.prototype.getData = function () {
         return this.data;
+    };
+    DataService.prototype.pushData = function (value) {
+        this.pushedData.emit(value);
     };
     return DataService;
 }());

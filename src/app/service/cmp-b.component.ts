@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { LogService } from './log.service';
 import { DataService } from './data.service';
@@ -10,7 +10,6 @@ import { DataService } from './data.service';
       <input type="text" #input>
       <button (click)="onLog(input.value)">Log</button>
       <button (click)="onStore(input.value)">Store</button>
-      <button (click)="onSend()">Send</button>
     </div>
     <hr>
     <div>
@@ -24,7 +23,7 @@ import { DataService } from './data.service';
     </div>
   `
 })
-export class CmpBComponent {
+export class CmpBComponent implements OnInit {
   value = '';
 
   constructor(private logService: LogService, private dataService: DataService) {}
@@ -45,5 +44,11 @@ export class CmpBComponent {
 
   onSend(value: string) {
 
+  }
+
+  ngOnInit() {
+    this.dataService.pushedData.subscribe(
+      data => this.value = data
+    );
   }
 }

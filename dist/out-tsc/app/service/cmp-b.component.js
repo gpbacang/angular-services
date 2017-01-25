@@ -28,12 +28,16 @@ var CmpBComponent = (function () {
     };
     CmpBComponent.prototype.onSend = function (value) {
     };
+    CmpBComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.dataService.pushedData.subscribe(function (data) { return _this.value = data; });
+    };
     return CmpBComponent;
 }());
 CmpBComponent = __decorate([
     Component({
         selector: 'si-cmp-b',
-        template: "\n    <div>\n      <input type=\"text\" #input>\n      <button (click)=\"onLog(input.value)\">Log</button>\n      <button (click)=\"onStore(input.value)\">Store</button>\n      <button (click)=\"onSend()\">Send</button>\n    </div>\n    <hr>\n    <div>\n        <button (click)=\"onGet()\">Refresh Storage</button>\n        <h3>Storage</h3>\n        <ul>\n            <li *ngFor=\"let item of items\">{{item}}</li>\n        </ul>\n        <h3>Received Value</h3>\n        <p>{{value}}</p>\n    </div>\n  "
+        template: "\n    <div>\n      <input type=\"text\" #input>\n      <button (click)=\"onLog(input.value)\">Log</button>\n      <button (click)=\"onStore(input.value)\">Store</button>\n    </div>\n    <hr>\n    <div>\n        <button (click)=\"onGet()\">Refresh Storage</button>\n        <h3>Storage</h3>\n        <ul>\n            <li *ngFor=\"let item of items\">{{item}}</li>\n        </ul>\n        <h3>Received Value</h3>\n        <p>{{value}}</p>\n    </div>\n  "
     }),
     __metadata("design:paramtypes", [LogService, DataService])
 ], CmpBComponent);
